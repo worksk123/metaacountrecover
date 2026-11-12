@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Social Media Account Recovery Assistance</title>
+<meta name="description" content="Independent guidance for Facebook and Instagram account recovery. Not affiliated with Meta.">
+<style>
+:root{--blue:#1877F2;--blue-d:#0F5FCC;--blue-l:#E7F1FF;--ink:#1C2B33;--mute:#5B6B76;--line:#DCE4EC;--bg:#F4F8FD;--ok:#18A058}
+*{box-sizing:border-box;margin:0}
+body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+a{color:var(--blue)}
+.wrap{max-width:960px;margin:0 auto;padding:0 18px}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--blue);font-size:1.05rem}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--blue);display:grid;place-items:center}
+.logo svg{width:20px;height:20px;fill:#fff}
+.pill{font-size:.78rem;background:var(--blue-l);color:var(--blue-d);padding:5px 12px;border-radius:99px;font-weight:600}
+.hero{background:linear-gradient(135deg,#1877F2,#0A4FB8);color:#fff;padding:46px 0 90px;text-align:center}
+.hero h1{font-size:clamp(1.7rem,5vw,2.6rem);line-height:1.2;margin-bottom:12px}
+.hero p{max-width:620px;margin:0 auto;opacity:.92}
+.notice{max-width:700px;margin:18px auto 0;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);border-radius:12px;padding:10px 14px;font-size:.88rem}
+main{margin-top:-56px;padding-bottom:40px}
+.card{background:#fff;border-radius:18px;box-shadow:0 12px 40px rgba(24,119,242,.14);padding:28px;border:1px solid var(--line)}
+.steps{display:flex;gap:8px;margin-bottom:24px}
+.dot{flex:1;text-align:center;font-size:.78rem;color:var(--mute);font-weight:600}
+.dot i{display:block;height:5px;border-radius:9px;background:var(--line);margin-bottom:6px;transition:.4s}
+.dot.on{color:var(--blue)}.dot.on i{background:var(--blue)}
+.screen{display:none;animation:in .45s ease}
+.screen.show{display:block}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h2{font-size:1.4rem;margin-bottom:6px}
+.sub{color:var(--mute);margin-bottom:20px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.opt{border:2px solid var(--line);border-radius:16px;padding:24px 18px;background:#fff;cursor:pointer;text-align:center;font:inherit;color:inherit;transition:.25s}
+.opt:hover,.opt:focus-visible{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 8px 22px rgba(24,119,242,.18);outline:none}
+.opt .ic{width:58px;height:58px;border-radius:16px;margin:0 auto 12px;display:grid;place-items:center}
+.opt .ic svg{width:30px;height:30px;fill:#fff}
+.fb .ic{background:#1877F2}.ig .ic{background:linear-gradient(45deg,#F9A826,#E1306C,#833AB4)}
+.opt b{display:block;font-size:1.05rem}.opt span{font-size:.85rem;color:var(--mute)}
+label{display:block;font-weight:600;margin:16px 0 6px;font-size:.92rem}
+input,select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+input:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px var(--blue-l)}
+.hint{font-size:.8rem;color:var(--mute);margin-top:5px}
+.safe{background:#EAF7F0;border:1px solid #BFE6D0;color:#14663A;border-radius:12px;padding:12px 14px;font-size:.88rem;margin-top:18px}
+.issues{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.issue{position:relative}
+.issue input{position:absolute;opacity:0;width:0}
+.issue div{border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:.92rem;cursor:pointer;transition:.2s;font-weight:500}
+.issue input:checked+div{border-color:var(--blue);background:var(--blue-l);color:var(--blue-d);font-weight:700}
+.issue input:focus-visible+div{box-shadow:0 0 0 4px var(--blue-l)}
+.btns{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{border:0;border-radius:12px;padding:14px 28px;font:inherit;font-weight:700;cursor:pointer;background:var(--blue);color:#fff;transition:.2s;text-decoration:none;display:inline-block}
+.btn:hover{background:var(--blue-d);transform:translateY(-1px)}
+.btn.ghost{background:var(--blue-l);color:var(--blue-d)}
+.err{color:#C62828;font-size:.85rem;margin-top:8px;display:none}
+ol.guide{padding-left:0;list-style:none;counter-reset:s}
+ol.guide li{counter-increment:s;position:relative;padding:4px 0 14px 46px}
+ol.guide li:before{content:counter(s);position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.links{display:grid;gap:10px;margin:8px 0 6px}
+.links a{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;text-decoration:none;font-weight:600;transition:.2s}
+.links a:hover{border-color:var(--blue);background:var(--blue-l)}
+.links small{display:block;font-weight:400;color:var(--mute)}
+.pay{margin-top:26px;border:1.5px dashed var(--blue);border-radius:16px;padding:20px;background:#FAFCFF}
+.pay h3{color:var(--blue-d);margin-bottom:6px}
+.fee{font-size:1.6rem;font-weight:800;color:var(--blue)}
+.payrow{display:flex;gap:22px;flex-wrap:wrap;margin-top:12px;align-items:flex-start}
+.qr{width:170px;height:170px;border:1.5px solid var(--line);border-radius:14px;background:#fff;display:grid;place-items:center;overflow:hidden;text-align:center;font-size:.78rem;color:var(--mute);padding:6px}
+.qr img{width:100%;height:100%;object-fit:contain}
+.pay ul{padding-left:18px;font-size:.9rem;flex:1;min-width:220px}
+.warn{font-size:.83rem;color:#7A5200;background:#FFF6DD;border:1px solid #F3DE9C;border-radius:10px;padding:10px 12px;margin-top:14px}
+.done{text-align:center;padding:20px 0}
+.tick{width:74px;height:74px;border-radius:50%;background:var(--ok);margin:0 auto 18px;display:grid;place-items:center;animation:pop .5s ease}
+.tick svg{width:38px;height:38px;stroke:#fff;fill:none;stroke-width:3}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.feat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;font-size:.9rem}
+.feat b{display:block;color:var(--blue-d);margin-bottom:4px}
+footer{background:#fff;border-top:1px solid var(--line);padding:22px 0;font-size:.8rem;color:var(--mute);text-align:center}
+@media(max-width:640px){.opts,.issues,.feats{grid-template-columns:1fr}.card{padding:20px}.pill{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+ OWNER SETTINGS — edit everything in this block; no need to touch the rest
+ ===================================================================== -->
+<script>
+const CONFIG = {
+  businessName: "meta acount recover",          // <-- your brand name
+  contactText:  "Need help? WhatsApp: +91 00000 00000 | Email: support@example.com", // <-- your contact line
+
+  // ---- Optional consultation payment section ----
+  showPayment:  true,                               // <-- set false to hide payment section completely
+  feeAmount:    "₹299",                             // <-- the real fee you charge
+  qrImagePath:  "qr.png",            // <-- REPLACE THIS FILE (or change path) to update the QR
+  payeeName:    "Your Name / Business Name",        // <-- shown under the QR
+  feeCovers: [                                      // <-- edit: exactly what the fee covers
+    "A one-to-one guidance session on the official recovery steps",
+    "Help preparing your appeal details and checking you used the right forms",
+    "Tips to secure the account after access returns"
+  ],
+
+  // ---- Official recovery links (verify occasionally; platforms may change pages) ----
+  platforms: {
+    Facebook: {
+      links: [
+        {t:"Find & recover your account", d:"Official Facebook account finder", u:"https://www.facebook.com/login/identify"},
+        {t:"Hacked or compromised account", d:"Secure a hacked account", u:"https://www.facebook.com/hacked"},
+        {t:"Disabled account appeal", d:"Request a review", u:"https://www.facebook.com/help/contact/260749603972907"},
+        {t:"Facebook Help Center", d:"All official help topics", u:"https://www.facebook.com/help"}
+      ]
+    },
+    Instagram: {
+      links: [
+        {t:"Reset password / find account", d:"Official Instagram reset page", u:"https://www.instagram.com/accounts/password/reset/"},
+        {t:"Hacked account help", d:"Secure a hacked account", u:"https://help.instagram.com/149494825257596"},
+        {t:"Disabled account help", d:"Appeal a disabled account", u:"https://help.instagram.com/366993040048856"},
+        {t:"Instagram Help Center", d:"All official help topics", u:"https://help.instagram.com"}
+      ]
+    }
+  },
+  // ---- Instructions shown per issue type (edit text freely) ----
+  tips: {
+    "Suspended account": ["Open the official link below and sign in on a device you normally use.","Read the notice shown on the account and choose the review/appeal option.","Provide accurate details only; do not submit repeated appeals.","Check your email (including spam) for messages from the platform."],
+    "Disabled account":  ["Open the official disabled-account link below.","Follow the appeal form and submit once with accurate details.","Keep an eye on your registered email for the platform's reply.","Avoid creating duplicate accounts while the review is pending."],
+    "Login problem":     ["Use the official account finder to search by email, phone or username.","Choose a recovery option sent by the platform to your own email or phone.","Try a device and network you have used before.","If it still fails, use the Help Center link below."],
+    "Account access problem": ["Check whether the account was hacked using the official hacked-account page.","Change your password only through the official page.","Turn on two-factor authentication once you regain access.","Review logged-in devices and remove any you do not recognise."]
+  }
+};
+</script>
+
+<header><div class="wrap nav">
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1 13l6-6-1.4-1.4L11 12.2 8.4 9.6 7 11l4 4z"/></svg></div><span id="bn"></span></div>
+  <span class="pill">Independent • Not affiliated with Meta</span>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>Get Guided Help Recovering Your<br>Facebook or Instagram Account</h1>
+  <p>Simple step-by-step guidance that points you to the official recovery tools. We never ask for your password or any codes.</p>
+  <div class="notice"><!-- EDIT disclaimer if needed -->We are an independent assistance service. We are not affiliated with, endorsed by, or sponsored by Meta, Facebook or Instagram.</div>
+</div></section>
+
+<main><div class="wrap">
+<div class="card">
+  <div class="steps">
+    <div class="dot on" data-s="1"><i></i>1. Platform</div>
+    <div class="dot" data-s="2"><i></i>2. Details</div>
+    <div class="dot" data-s="3"><i></i>3. Instructions</div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="screen show" id="s1">
+    <h2>Which account needs help?</h2>
+    <p class="sub">Choose a platform to continue.</p>
+    <div class="opts">
+      <button class="opt fb" onclick="pick('Facebook')"><div class="ic"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.5 1.6-1.5h1.7V4.4c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.5V14h2.8v8h3.2z"/></svg></div><b>Facebook Account Assistance</b><span>Suspended, disabled or login issues</span></button>
+      <button class="opt ig" onclick="pick('Instagram')"><div class="ic"><svg viewBox="0 0 24 24"><path d="M7.8 2h8.4A5.8 5.8 0 0122 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8A5.8 5.8 0 012 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8A3.6 3.6 0 007.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6A3.6 3.6 0 0016.4 4H7.6zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2a3 3 0 100 6 3 3 0 000-6zm5.2-2.7a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg></div><b>Instagram Account Assistance</b><span>Suspended, disabled or login issues</span></button>
+    </div>
+    <div class="feats">
+      <div class="feat"><b>Safe by design</b>No passwords, OTPs or recovery codes, ever.</div>
+      <div class="feat"><b>Official links only</b>All recovery happens on Meta's own pages.</div>
+      <div class="feat"><b>Clear guidance</b>Plain steps matched to your issue.</div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="screen" id="s2">
+    <h2><span id="ptitle"></span> Assistance Form</h2>
+    <p class="sub">Tell us a little about the problem.</p>
+    <div class="safe">🔒 Never enter your password, OTP, login code or recovery code here. We will never ask for them.</div>
+    <label for="plat">Account platform</label>
+    <select id="plat" onchange="pick(this.value,true)"><option>Facebook</option><option>Instagram</option></select>
+    <label for="contact">Registered email or phone number <small style="font-weight:400;color:var(--mute)">(optional)</small></label>
+    <input id="contact" type="text" autocomplete="off" placeholder="name@example.com or phone number">
+    <div class="hint">Optional. Used only so we can reach you. This page does not store or send it anywhere by itself.</div>
+    <label>Account issue type</label>
+    <div class="issues" id="issues"></div>
+    <div class="err" id="err">Please select an issue type to continue.</div>
+    <div class="btns"><button class="btn ghost" onclick="go(1)">Back</button><button class="btn" onclick="next()">Next →</button></div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="screen" id="s3">
+    <h2>Your Recovery Instructions</h2>
+    <p class="sub" id="summary"></p>
+    <ol class="guide" id="tips"></ol>
+    <h3 style="margin:6px 0 8px">Official <span id="p3"></span> recovery links</h3>
+    <div class="links" id="links"></div>
+
+    <!-- Optional payment section: controlled by CONFIG.showPayment -->
+    <div class="pay" id="pay" style="display:none">
+      <h3>Optional: Consultation Service</h3>
+      <p style="font-size:.9rem">Everything above is free. If you would like personal guidance, you may optionally book a consultation.</p>
+      <div class="fee" id="fee"></div>
+      <div class="payrow">
+        <div>
+          <div class="qr" id="qrbox"><img id="qr" alt="Payment QR code"></div>
+          <div class="hint" id="payee" style="text-align:center"></div>
+        </div>
+        <div><b style="font-size:.9rem">What this fee covers:</b><ul id="covers"></ul></div>
+      </div>
+      <div class="warn">Payment is for consultation time only. It does <b>not</b> guarantee account restoration. Only the platform decides whether an account is restored.</div>
+    </div>
+
+    <div class="btns"><button class="btn ghost" onclick="go(2)">Back</button><button class="btn" onclick="submitReq()">Submit Assistance Request</button></div>
+  </div>
+
+  <!-- STEP 4: confirmation -->
+  <div class="screen" id="s4">
+    <div class="done">
+      <div class="tick"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h2>Your Assistance Request Has Been Received!</h2>
+      <p class="sub" style="max-width:560px;margin:10px auto 18px">Thank you for contacting us. Please follow the official recovery instructions provided for your selected platform. Account restoration is subject to the platform's review and approval.</p>
+      <p class="hint" id="contactline"></p>
+      <div class="btns" style="justify-content:center"><button class="btn" onclick="restart()">Start Over</button></div>
+    </div>
+  </div>
+</div>
+</div></main>
+
+<footer><div class="wrap">
+  <p><b id="fn"></b> is an independent service and is not affiliated with, endorsed by, or connected to Meta Platforms, Inc., Facebook or Instagram. All trademarks belong to their respective owners.</p>
+  <p style="margin-top:6px">We never ask for passwords, OTPs, authentication codes or recovery codes. We do not guarantee account recovery.</p>
+</div></footer>
+
+<script>
+/* ---- Page logic (owners normally do not need to edit below) ---- */
+let platform="Facebook", issue="";
+const $=id=>document.getElementById(id);
+$("bn").textContent=$("fn").textContent=CONFIG.businessName;
+
+// Build issue radio cards
+Object.keys(CONFIG.tips).forEach(k=>{
+  const l=document.createElement("label");l.className="issue";l.style.margin=0;
+  l.innerHTML='<input type="radio" name="issue" value="'+k+'"><div>'+k+'</div>';
+  l.querySelector("input").onchange=e=>{issue=e.target.value;$("err").style.display="none"};
+  $("issues").appendChild(l);
+});
+
+function go(n){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("show"));
+  $("s"+n).classList.add("show");
+  document.querySelectorAll(".dot").forEach(d=>d.classList.toggle("on",+d.dataset.s<=Math.min(n,3)));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function pick(p,stay){
+  platform=p;$("plat").value=p;$("ptitle").textContent=p;
+  if(!stay)go(2);
+}
+function next(){
+  if(!issue){$("err").style.display="block";return}
+  const c=CONFIG.platforms[platform];
+  $("summary").textContent=platform+" • "+issue;
+  $("p3").textContent=platform;
+  $("tips").innerHTML=CONFIG.tips[issue].map(t=>"<li>"+t+"</li>").join("");
+  $("links").innerHTML=c.links.map(l=>'<a href="'+l.u+'" target="_blank" rel="noopener noreferrer"><span>'+l.t+'<small>'+l.d+'</small></span><span>↗</span></a>').join("");
+  if(CONFIG.showPayment){
+    $("pay").style.display="block";
+    $("fee").textContent=CONFIG.feeAmount;
+    $("payee").textContent=CONFIG.payeeName;
+    $("covers").innerHTML=CONFIG.feeCovers.map(t=>"<li>"+t+"</li>").join("");
+    const q=$("qr");q.src=CONFIG.qrImagePath;
+    q.onerror=()=>{$("qrbox").innerHTML="Add your QR image at<br><b>"+CONFIG.qrImagePath+"</b>"};
+  }
+  go(3);
+}
+function submitReq(){
+  // Static version: nothing is stored or transmitted. Connect a backend/form service here if needed later.
+  $("contactline").textContent=CONFIG.contactText;
+  go(4);
+}
+function restart(){
+  issue="";document.querySelectorAll('input[name=issue]').forEach(r=>r.checked=false);
+  $("contact").value="";go(1);
+}
+pick("Facebook",true);
+</script>
+</body>
+</html>
